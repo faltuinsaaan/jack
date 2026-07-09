@@ -237,7 +237,7 @@ export default function App() {
                 <img
                   src={jackImage}
                   alt="Priyank Verma - The Jack"
-                  className="w-full h-full object-cover grayscale opacity-50 group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-75 transition-all duration-700 ease-[0.16, 1, 0.3, 1]"
+                  className="w-full h-full object-cover opacity-100 md:grayscale md:opacity-50 md:group-hover:scale-105 md:group-hover:grayscale-0 md:group-hover:opacity-75 transition-all duration-700 ease-[0.16, 1, 0.3, 1]"
                   referrerPolicy="no-referrer"
                 />
 
@@ -343,7 +343,7 @@ export default function App() {
                   <img
                     src={priyankImage}
                     alt="Priyank Verma - Origins"
-                    className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                    className="w-full h-full object-cover opacity-100 md:opacity-90 md:group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                     referrerPolicy="no-referrer"
                   />
                   {/* Subtle, elegant overlay for modern aesthetic */}
