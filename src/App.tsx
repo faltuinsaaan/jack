@@ -744,9 +744,8 @@ export default function App() {
           </div>
         </section>
 
-        {/* Footer info */}
         <footer className="w-full border-t border-app-border py-12 select-none">
-          <div className="max-w-7xl mx-auto w-full px-6 md:px-12 flex flex-col md:flex-row justify-between items-center text-xs font-mono text-app-text-dim space-y-4 md:space-y-0">
+          <div className="max-w-7xl mx-auto w-full px-6 md:px-12 flex flex-col md:flex-row justify-between items-center text-[10px] sm:text-xs font-mono text-app-text-dim space-y-4 md:space-y-0 text-center md:text-left">
             <span>© 2026 Priyank Verma · Crafted with curiosity.</span>
             <div className="flex space-x-6">
               <span>♠ Imagine</span>
