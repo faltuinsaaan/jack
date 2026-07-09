@@ -390,7 +390,7 @@ export default function App() {
               <div className="space-y-4 pt-4">
                 <a
                   href="mailto:priyankv489@gmail.com"
-                  className="flex items-center space-x-3 text-app-text-muted hover:text-app-text transition-colors text-xs font-mono tracking-wider"
+                  className="flex items-center space-x-3 text-app-text md:text-app-text-muted md:hover:text-app-text transition-colors text-xs font-mono tracking-wider"
                 >
                   <Mail size={16} className="text-app-text-dim" />
                   <span>PRIYANKV489@GMAIL.COM</span>
@@ -399,7 +399,7 @@ export default function App() {
                   href="https://github.com/faltuinsaaan"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center space-x-3 text-app-text-muted hover:text-app-text transition-colors text-xs font-mono tracking-wider"
+                  className="flex items-center space-x-3 text-app-text md:text-app-text-muted md:hover:text-app-text transition-colors text-xs font-mono tracking-wider"
                 >
                   <Github size={16} className="text-app-text-dim" />
                   <span>GITHUB / faltuinsaaan</span>
@@ -408,7 +408,7 @@ export default function App() {
                   href="https://www.instagram.com/aiknpry/"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center space-x-3 text-app-text-muted hover:text-app-text transition-colors text-xs font-mono tracking-wider"
+                  className="flex items-center space-x-3 text-app-text md:text-app-text-muted md:hover:text-app-text transition-colors text-xs font-mono tracking-wider"
                 >
                   <Instagram size={16} className="text-app-text-dim" />
                   <span>INSTAGRAM / @aiknpry</span>
@@ -776,7 +776,7 @@ export default function App() {
               <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 flex justify-between items-center">
                 <button
                   onClick={() => setSelectedProject(null)}
-                  className="flex items-center space-x-3 text-app-text-muted hover:text-app-text font-mono text-xs uppercase tracking-widest cursor-pointer group"
+                  className="flex items-center space-x-3 text-app-text md:text-app-text-muted md:hover:text-app-text font-mono text-xs uppercase tracking-widest cursor-pointer group"
                 >
                   <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
                   <span>Back to The Deck</span>
