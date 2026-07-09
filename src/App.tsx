@@ -817,7 +817,7 @@ export default function App() {
                         href={selectedProject.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 bg-[#0f0f0f] hover:bg-[#141414] border border-[#2e2e2e] rounded py-1 px-4 text-center font-mono text-[9px] text-app-text-dim hover:text-white tracking-wider max-w-sm md:max-w-md mx-auto truncate transition-colors cursor-pointer block"
+                        className="flex-1 bg-[#0f0f0f] hover:bg-[#141414] border border-[#2e2e2e] rounded py-1 px-4 text-center font-mono text-[9px] text-white md:text-app-text-dim md:hover:text-white tracking-wider max-w-sm md:max-w-md mx-auto truncate transition-colors cursor-pointer block"
                         style={{ textDecoration: 'none' }}
                       >
                         {selectedProject.link}
@@ -1009,11 +1009,11 @@ export default function App() {
                       href={selectedProject.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full sm:w-auto bg-app-text hover:bg-[#eaeaea] text-app-bg font-mono text-xs uppercase tracking-widest px-8 py-5 rounded-lg transition-all cursor-pointer flex items-center justify-center space-x-3 group"
+                      className="w-full sm:w-auto bg-app-text hover:bg-app-text/90 text-app-bg font-mono text-xs uppercase tracking-widest px-8 py-5 rounded-lg transition-all cursor-pointer flex items-center justify-center space-x-3 group"
                       style={{ textDecoration: 'none' }}
                     >
-                      <span className="text-black font-semibold">LAUNCH EXPERIENCE</span>
-                      <ArrowUpRight size={14} className="text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      <span className="font-semibold">LAUNCH EXPERIENCE</span>
+                      <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </a>
                   )}
                   <button
