@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@100;200;300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+  --black: #000000;
+  --white: #ffffff;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-color-strong: rgba(255, 255, 255, 0.2);
+  --text-dim: rgba(255, 255, 255, 0.4);
+  --text-muted: rgba(255, 255, 255, 0.7);
+  --text-body: rgba(255, 255, 255, 0.8);
+  --card-bg: #0c0c0c;
+  --card-bg-elevated: #111111;
+  --card-hover: rgba(255, 255, 255, 0.03);
+  --inverse-bg: #ffffff;
+  --inverse-text: #000000;
+  --inverse-hover: #e5e5e5;
+  --panel-bg: #090909;
+}
+
+:root.light {
+  --background: #faf9f5; /* Warm high-end luxury editorial off-white */
+  --foreground: #111111; /* Deep charcoal black */
+  --border-color: rgba(17, 17, 17, 0.1);
+  --border-color-strong: rgba(17, 17, 17, 0.2);
+  --text-dim: rgba(17, 17, 17, 0.45);
+  --text-muted: rgba(17, 17, 17, 0.7);
+  --text-body: rgba(17, 17, 17, 0.85);
+  --card-bg: #f4f3ed; /* Subtle light card background */
+  --card-bg-elevated: #eae9e2;
+  --card-hover: rgba(17, 17, 17, 0.03);
+  --inverse-bg: #111111;
+  --inverse-text: #ffffff;
+  --inverse-hover: #262626;
+  --panel-bg: #f7f6f0;
+}
+
+@theme {
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Theme colors map to CSS variables */
+  --color-app-bg: var(--background);
+  --color-app-text: var(--foreground);
+  --color-app-border: var(--border-color);
+  --color-app-border-strong: var(--border-color-strong);
+  --color-app-text-dim: var(--text-dim);
+  --color-app-text-muted: var(--text-muted);
+  --color-app-text-body: var(--text-body);
+  --color-app-card-bg: var(--card-bg);
+  --color-app-card-bg-elevated: var(--card-bg-elevated);
+  --color-app-card-hover: var(--card-hover);
+  --color-app-inverse-bg: var(--inverse-bg);
+  --color-app-inverse-text: var(--inverse-text);
+  --color-app-inverse-hover: var(--inverse-hover);
+  --color-app-panel-bg: var(--panel-bg);
+}
+
+/* Base resets */
+html {
+  scroll-behavior: smooth;
+  background-color: var(--background);
+  color: var(--foreground);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--foreground);
+  color: var(--background);
+}
+
+/* Hide webkit scrollbars for visual minimalism but maintain scrollability */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ===== CUSTOM CURSOR ===== */
+@media (pointer: fine) {
+  body, a, button, select, input, textarea, [role="button"], [onclick] {
+    cursor: none !important;
+  }
+}
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  background: var(--white); /* White works perfectly with mix-blend-mode: difference */
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.3s ease,
+              opacity 0.3s ease;
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+}
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid var(--white); /* White works beautifully with difference blend */
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.3;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease,
+              opacity 0.4s ease;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+}
+.cursor.hovering {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.2);
+  mix-blend-mode: difference;
+}
+.cursor-ring.hovering {
+  width: 60px;
+  height: 60px;
+  opacity: 0;
+}
+
+

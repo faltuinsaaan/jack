@@ -1,0 +1,6 @@
+{
+  "name": "Priyank Verma Portfolio",
+  "description": "The premium, high-contrast, editorial full-stack portfolio of Priyank Verma.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
