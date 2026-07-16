@@ -196,7 +196,7 @@ export default function AboutAccordion() {
                           initial={{ opacity: 0, x: 30 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                          className="relative w-full max-w-[200px] aspect-[2.5/3.5] bg-app-card-bg/25 border border-app-border/40 rounded-[14px] p-4 flex flex-col justify-between font-mono text-xs select-none shadow-2xl backdrop-blur-sm group/card overflow-hidden"
+                          className="relative w-full max-w-[200px] aspect-[2.5/3.5] bg-app-card-bg-elevated border border-app-border-strong rounded-[14px] p-4 flex flex-col justify-between font-mono text-xs select-none shadow-2xl backdrop-blur-sm group/card overflow-hidden"
                         >
                           {/* Animated SVG border drawing */}
                           <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -249,7 +249,7 @@ export default function AboutAccordion() {
                           </div>
                         </motion.div>
                       ) : (
-                        <div className="hidden md:flex w-full max-w-[200px] aspect-[2.5/3.5] rounded-[14px] border border-app-border/10 bg-app-card-bg/5 items-center justify-center font-mono text-[9px] text-app-text-dim/30 tracking-widest">
+                        <div className="hidden md:flex w-full max-w-[200px] aspect-[2.5/3.5] rounded-[14px] border border-app-border/30 bg-app-card-bg/35 items-center justify-center font-mono text-[9px] text-app-text-dim/60 tracking-widest">
                           [ CARD FACE DOWN ]
                         </div>
                       )}
