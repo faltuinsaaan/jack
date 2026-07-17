@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion } from 'motion/react';
+import { motion, useMotionValue } from 'motion/react';
 import { Project } from '../types';
 import { projects } from '../data/projects';
 
@@ -9,10 +9,11 @@ interface WorkGridProps {
 
 export default function WorkGrid({ onSelectProject }: WorkGridProps) {
   const viewportRef = useRef<HTMLDivElement>(null);
-  
-  // Starting centered offset on a 1700x1100 canvas inside a typical viewport
-  const [coordinates, setCoordinates] = useState({ x: -280, y: -180 });
   const [isDragging, setIsDragging] = useState(false);
+
+  // Use motion values for drag coordinates to prevent React re-renders and jitter
+  const x = useMotionValue(-280);
+  const y = useMotionValue(-180);
 
   // Auto-adjust initial coordinates based on screen size on mount
   useEffect(() => {
@@ -22,9 +23,10 @@ export default function WorkGrid({ onSelectProject }: WorkGridProps) {
       // Center the 1700x1100 canvas perfectly in the viewport
       const targetX = -(1700 - vWidth) / 2;
       const targetY = -(1100 - vHeight) / 2;
-      setCoordinates({ x: targetX, y: targetY });
+      x.set(targetX);
+      y.set(targetY);
     }
-  }, []);
+  }, [x, y]);
 
   // Prevent click on projects if the user was actively dragging
   const handleProjectClick = (project: Project, e: React.MouseEvent) => {
@@ -49,17 +51,12 @@ export default function WorkGrid({ onSelectProject }: WorkGridProps) {
           dragConstraints={viewportRef}
           dragElastic={0.1}
           dragTransition={{ power: 0.2, bounceStiffness: 250, bounceDamping: 30 }}
-          animate={coordinates}
+          style={{ x, y, touchAction: 'none' }}
           onDragStart={() => setIsDragging(true)}
-          onDragEnd={(event, info) => {
+          onDragEnd={() => {
             setTimeout(() => setIsDragging(false), 50);
-            setCoordinates({
-              x: coordinates.x + info.offset.x,
-              y: coordinates.y + info.offset.y
-            });
           }}
           className="absolute w-[1700px] h-[1100px] bg-transparent p-12"
-          style={{ touchAction: 'none' }}
         >
           
           {/* -------------------- THE CANVAS ELEMENTS -------------------- */}
