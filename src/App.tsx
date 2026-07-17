@@ -842,36 +842,40 @@ export default function App() {
                     </p>
                   </div>
 
-                  {/* Browser Window Frame */}
-                  <div className="w-full bg-[#161616] border border-[#2e2e2e] rounded-t-lg px-4 py-3 flex items-center space-x-2 shadow-xl">
-                    <div className="flex space-x-1.5 flex-shrink-0">
-                      <div className="w-2.5 h-2.5 rounded-full bg-[#ef4444]/80" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-[#eab308]/80" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-[#22c55e]/80" />
-                    </div>
-                    {selectedProject.link ? (
-                      <a
-                        href={selectedProject.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 bg-[#0f0f0f] hover:bg-[#141414] border border-[#2e2e2e] rounded py-1 px-4 text-center font-mono text-[9px] text-white md:text-app-text-dim md:hover:text-white tracking-wider max-w-sm md:max-w-md mx-auto truncate transition-colors cursor-pointer block"
-                        style={{ textDecoration: 'none' }}
-                      >
-                        {selectedProject.link}
-                      </a>
-                    ) : (
-                      <div className="flex-1 bg-[#0f0f0f] border border-[#2e2e2e] rounded py-1 px-4 text-center font-mono text-[9px] text-app-text-dim tracking-wider max-w-sm md:max-w-md mx-auto truncate">
-                        https://{selectedProject.title.toLowerCase().replace(/[^a-z0-9]/g, '')}.studio
+                  {/* Browser Window Mockup Container */}
+                  <div className="w-full flex flex-col rounded-xl overflow-hidden border border-[#2e2e2e] shadow-2xl">
+                    {/* Browser Window Frame */}
+                    <div className="w-full bg-[#161616] border-b border-[#2e2e2e] px-4 py-3 flex items-center space-x-2">
+                      <div className="flex space-x-1.5 flex-shrink-0">
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#ef4444]/80" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#eab308]/80" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#22c55e]/80" />
                       </div>
-                    )}
-                  </div>
-                  <div className="bg-app-card-bg border-l border-r border-b border-[#2e2e2e] overflow-hidden rounded-b-xl aspect-[16/10] shadow-2xl relative group">
-                    <img
-                      src={selectedProject.image}
-                      alt={`${selectedProject.title} Landing Page`}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-1000"
-                    />
+                      {selectedProject.link ? (
+                        <a
+                          href={selectedProject.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 bg-[#0f0f0f] hover:bg-[#141414] border border-[#2e2e2e] rounded py-1 px-4 text-center font-mono text-[9px] text-white md:text-app-text-dim md:hover:text-white tracking-wider max-w-sm md:max-w-md mx-auto truncate transition-colors cursor-pointer block"
+                          style={{ textDecoration: 'none' }}
+                        >
+                          {selectedProject.link}
+                        </a>
+                      ) : (
+                        <div className="flex-1 bg-[#0f0f0f] border border-[#2e2e2e] rounded py-1 px-4 text-center font-mono text-[9px] text-app-text-dim tracking-wider max-w-sm md:max-w-md mx-auto truncate">
+                          https://{selectedProject.title.toLowerCase().replace(/[^a-z0-9]/g, '')}.studio
+                        </div>
+                      )}
+                    </div>
+                    {/* Browser Window Body (Image) */}
+                    <div className="bg-app-card-bg aspect-[16/10] relative overflow-hidden group">
+                      <img
+                        src={selectedProject.image}
+                        alt={`${selectedProject.title} Landing Page`}
+                        referrerPolicy="no-referrer"
+                        className="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-1000"
+                      />
+                    </div>
                   </div>
                 </div>
 
