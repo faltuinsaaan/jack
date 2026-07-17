@@ -191,7 +191,7 @@ export default function Navigation({ scrollToSection }: NavigationProps) {
                 <span className="font-mono text-xs text-app-text-dim/60 tracking-[0.2em] mb-2">
                   01
                 </span>
-                <span className="font-serif text-3xl md:text-5xl font-light text-app-text group-hover:text-white transition-colors duration-300 tracking-wide">
+                <span className="font-serif text-3xl md:text-5xl font-light text-app-text group-hover:text-app-text transition-colors duration-300 tracking-wide">
                   Origins
                 </span>
                 <span className="font-mono text-[10px] md:text-xs text-app-text-dim/80 font-light mt-2 tracking-widest lowercase">
@@ -218,7 +218,7 @@ export default function Navigation({ scrollToSection }: NavigationProps) {
                 <span className="font-mono text-xs text-app-text-dim/60 tracking-[0.2em] mb-2">
                   02
                 </span>
-                <span className="font-serif text-3xl md:text-5xl font-light text-app-text group-hover:text-white transition-colors duration-300 tracking-wide">
+                <span className="font-serif text-3xl md:text-5xl font-light text-app-text group-hover:text-app-text transition-colors duration-300 tracking-wide">
                   The Deck
                 </span>
                 <span className="font-mono text-[10px] md:text-xs text-app-text-dim/80 font-light mt-2 tracking-widest lowercase">
@@ -245,7 +245,7 @@ export default function Navigation({ scrollToSection }: NavigationProps) {
                 <span className="font-mono text-xs text-app-text-dim/60 tracking-[0.2em] mb-2">
                   03
                 </span>
-                <span className="font-serif text-3xl md:text-5xl font-light text-app-text group-hover:text-white transition-colors duration-300 tracking-wide">
+                <span className="font-serif text-3xl md:text-5xl font-light text-app-text group-hover:text-app-text transition-colors duration-300 tracking-wide">
                   Your Move
                 </span>
                 <span className="font-mono text-[10px] md:text-xs text-app-text-dim/80 font-light mt-2 tracking-widest lowercase">
