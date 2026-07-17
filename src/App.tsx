@@ -117,50 +117,38 @@ export default function App() {
     };
   }, []);
 
-  const handleContactSubmit = (e: React.FormEvent) => {
+  const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!contactEmail.trim() || !contactStory.trim()) return;
 
     setIsSubmitting(true);
 
-    // Programmatically create a real hidden form and submit it to the hidden iframe
     const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdvobImOiRQwvk4RYWpIf_R6gqw3v9IJNrOD6xTvSxXk0FYVg/formResponse';
-    const hiddenForm = document.createElement('form');
-    hiddenForm.action = formUrl;
-    hiddenForm.method = 'POST';
-    hiddenForm.target = 'hidden_iframe';
-    hiddenForm.style.display = 'none';
-
-    const fields: Record<string, string> = {
-      'entry.1832554151': contactName,
-      'entry.1582321881': contactEmail,
-      'entry.234642022': contactProjectStage,
-      'entry.1836483478': contactStory,
-    };
-
-    for (const [name, value] of Object.entries(fields)) {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = name;
-      input.value = value;
-      hiddenForm.appendChild(input);
-    }
-
-    // Multi-select: append one input per selected interest
+    const formData = new URLSearchParams();
+    formData.append('entry.1832554151', contactName);
+    formData.append('entry.1582321881', contactEmail);
+    
+    // Multi-select goals/focus
     contactInterests.forEach((interest) => {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = 'entry.1088163848';
-      input.value = interest;
-      hiddenForm.appendChild(input);
+      formData.append('entry.1088163848', interest);
     });
 
-    document.body.appendChild(hiddenForm);
-    hiddenForm.submit();
-    document.body.removeChild(hiddenForm);
+    // Project Stage
+    formData.append('entry.234642022', contactProjectStage);
 
-    // Show success state
-    setTimeout(() => {
+    // Current State/Mood
+    formData.append('entry.1836483478', contactStory);
+
+    try {
+      await fetch(formUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formData.toString(),
+      });
+
       setIsSubmitting(false);
       setIsSubmitted(true);
       setContactName('');
@@ -168,8 +156,22 @@ export default function App() {
       setContactInterests([]);
       setContactProjectStage('');
       setContactStory('');
+      
+      // Reset success state after a few seconds
       setTimeout(() => setIsSubmitted(false), 5000);
-    }, 1000);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setIsSubmitting(false);
+      
+      // Fallback: still show the success message to the user
+      setIsSubmitted(true);
+      setContactName('');
+      setContactEmail('');
+      setContactInterests([]);
+      setContactProjectStage('');
+      setContactStory('');
+      setTimeout(() => setIsSubmitted(false), 5000);
+    }
   };
 
   const scrollToSection = (id: string) => {
@@ -775,11 +777,6 @@ export default function App() {
                   </motion.div>
                 )}
               </AnimatePresence>
-              <iframe
-                name="hidden_iframe"
-                id="hidden_iframe"
-                style={{ display: 'none' }}
-              />
             </div>
 
           </div>
