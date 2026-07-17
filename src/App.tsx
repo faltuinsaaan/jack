@@ -31,8 +31,8 @@ export default function App() {
   const [contactName, setContactName] = useState('');
   const [contactEmail, setContactEmail] = useState('');
   const [contactInterests, setContactInterests] = useState<string[]>([]);
-  const [contactBudget, setContactBudget] = useState('');
-  const [contactMessage, setContactMessage] = useState('');
+  const [contactProjectStage, setContactProjectStage] = useState('');
+  const [contactStory, setContactStory] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
@@ -119,21 +119,57 @@ export default function App() {
 
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!contactEmail.trim() || !contactMessage.trim()) return;
+    if (!contactEmail.trim() || !contactStory.trim()) return;
 
     setIsSubmitting(true);
-    // Simulate high-contrast sleek submission loading
+
+    // Programmatically create a real hidden form and submit it to the hidden iframe
+    const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdvobImOiRQwvk4RYWpIf_R6gqw3v9IJNrOD6xTvSxXk0FYVg/formResponse';
+    const hiddenForm = document.createElement('form');
+    hiddenForm.action = formUrl;
+    hiddenForm.method = 'POST';
+    hiddenForm.target = 'hidden_iframe';
+    hiddenForm.style.display = 'none';
+
+    const fields: Record<string, string> = {
+      'entry.1832554151': contactName,
+      'entry.1582321881': contactEmail,
+      'entry.234642022': contactProjectStage,
+      'entry.1836483478': contactStory,
+    };
+
+    for (const [name, value] of Object.entries(fields)) {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = name;
+      input.value = value;
+      hiddenForm.appendChild(input);
+    }
+
+    // Multi-select: append one input per selected interest
+    contactInterests.forEach((interest) => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'entry.1088163848';
+      input.value = interest;
+      hiddenForm.appendChild(input);
+    });
+
+    document.body.appendChild(hiddenForm);
+    hiddenForm.submit();
+    document.body.removeChild(hiddenForm);
+
+    // Show success state
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
       setContactName('');
       setContactEmail('');
       setContactInterests([]);
-      setContactBudget('');
-      setContactMessage('');
-      // Reset success state after a few seconds
+      setContactProjectStage('');
+      setContactStory('');
       setTimeout(() => setIsSubmitted(false), 5000);
-    }, 1500);
+    }, 1000);
   };
 
   const scrollToSection = (id: string) => {
@@ -269,7 +305,7 @@ export default function App() {
                 >
                   Jack of all trades.
                   <span className={`block italic mt-1 transition-all duration-500 ${isCardHovered ? 'text-app-text/100 scale-[1.005] origin-left' : 'text-app-text-muted'}`}>Master of building.</span>
-                  <span className={`block mt-1 font-normal transition-all duration-500 ${isCardHovered ? 'text-white' : ''}`}>Limited by none.</span>
+                  <span className={`block mt-1 font-normal transition-all duration-500 ${isCardHovered ? 'text-app-text scale-[1.005] origin-left' : 'text-app-text-dim'}`}>Limited by none.</span>
                 </motion.h1>
               </motion.div>
 
@@ -465,7 +501,7 @@ export default function App() {
                         </label>
                         <input
                           id="Name & Company"
-                          name="name"
+                          name="entry.1832554151"
                           type="text"
                           required
                           placeholder="John from Apple"
@@ -499,7 +535,7 @@ export default function App() {
                         </label>
                         <input
                           id="Your Email"
-                          name="email"
+                          name="entry.1582321881"
                           type="email"
                           required
                           placeholder="john@apple.com"
@@ -603,12 +639,12 @@ export default function App() {
                           "Growing",
                           "Existing Product"
                         ].map((stage) => {
-                          const isChecked = contactBudget === stage;
+                          const isChecked = contactProjectStage === stage;
                           return (
                             <button
                               key={stage}
                               type="button"
-                              onClick={() => setContactBudget(stage)}
+                              onClick={() => setContactProjectStage(stage)}
                               className={`px-5 py-3 rounded-full text-xs md:text-sm font-medium tracking-wide border transition-all duration-300 select-none cursor-pointer hover:scale-[1.02] active:scale-[0.98]
                                 ${isChecked
                                   ? 'bg-app-text text-app-bg border-app-text shadow-md font-semibold'
@@ -656,12 +692,12 @@ export default function App() {
                         </label>
                         <input
                           id="Tell us more about your project"
-                          name="message"
+                          name="entry.1836483478"
                           type="text"
                           required
                           placeholder="What's the idea? What's exciting about it? What's blocking you?"
-                          value={contactMessage}
-                          onChange={(e) => setContactMessage(e.target.value)}
+                          value={contactStory}
+                          onChange={(e) => setContactStory(e.target.value)}
                           className="w-full bg-transparent text-app-text focus:outline-none focus:border-app-text transition-colors py-3"
                           style={{
                             borderBottom: `.0625rem solid ${theme === 'light' ? '#eaeaea' : '#2a2a2a'}`,
@@ -739,6 +775,11 @@ export default function App() {
                   </motion.div>
                 )}
               </AnimatePresence>
+              <iframe
+                name="hidden_iframe"
+                id="hidden_iframe"
+                style={{ display: 'none' }}
+              />
             </div>
 
           </div>

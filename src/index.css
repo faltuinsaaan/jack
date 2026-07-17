@@ -139,4 +139,45 @@ body {
   opacity: 0;
 }
 
+/* Override browser autofill styling to match theme */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px var(--background) inset !important;
+  box-shadow: 0 0 0 1000px var(--background) inset !important;
+  -webkit-text-fill-color: var(--foreground) !important;
+  caret-color: var(--foreground) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
 
+/* ===== PLAYING CARD ELEVATION ===== */
+
+/* Dark theme: deep absorbing shadows */
+.playing-card {
+  box-shadow:
+    0 10px 30px -10px rgba(0, 0, 0, 0.7),
+    0 20px 50px -15px rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.playing-card:hover {
+  box-shadow:
+    0 15px 40px -10px rgba(0, 0, 0, 0.8),
+    0 30px 60px -15px rgba(0, 0, 0, 0.6);
+}
+
+/* Light theme: warm layered shadows (ambient + cast + diffusion) */
+:root.light .playing-card {
+  box-shadow:
+    0 4px 6px -1px rgba(43, 42, 40, 0.05),
+    0 20px 40px -10px rgba(43, 42, 40, 0.12),
+    0 25px 60px -15px rgba(43, 42, 40, 0.08);
+}
+
+:root.light .playing-card:hover {
+  box-shadow:
+    0 10px 15px -3px rgba(43, 42, 40, 0.05),
+    0 30px 60px -10px rgba(43, 42, 40, 0.18),
+    0 35px 80px -15px rgba(43, 42, 40, 0.1);
+}

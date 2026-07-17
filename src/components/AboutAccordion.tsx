@@ -123,13 +123,13 @@ export default function AboutAccordion() {
                 </span>
                 
                 {/* Title that fades to clean white on hover */}
-                <span className="font-sans text-lg md:text-xl font-light tracking-wide text-app-text/85 group-hover:text-white transition-colors duration-300">
+                <span className="font-sans text-lg md:text-xl font-light tracking-wide text-app-text/85 group-hover:text-app-text transition-colors duration-300">
                   {section.title}
                 </span>
               </div>
 
               {/* Plus icon rotating to minus, or 45 degrees */}
-              <div className="text-app-text-dim group-hover:text-white transition-colors duration-300 pr-2">
+              <div className="text-app-text-dim group-hover:text-app-text transition-colors duration-300 pr-2">
                 <motion.div
                   animate={{ rotate: isOpen ? 45 : 0 }}
                   transition={{ duration: 0.3, ease: "easeOut" }}
@@ -165,7 +165,7 @@ export default function AboutAccordion() {
                       {!hasReadMore ? (
                         <button
                           onClick={() => setReadMoreSectionId(section.id)}
-                          className="mt-6 flex items-center space-x-2 text-[10px] font-mono uppercase tracking-widest text-app-text-dim hover:text-white group/btn transition-colors duration-200 focus:outline-none"
+                          className="mt-6 flex items-center space-x-2 text-[10px] font-mono uppercase tracking-widest text-app-text-dim hover:text-app-text group/btn transition-colors duration-200 focus:outline-none"
                         >
                           <span>Read Details</span>
                           <motion.span
@@ -195,8 +195,16 @@ export default function AboutAccordion() {
                         <motion.div
                           initial={{ opacity: 0, x: 30 }}
                           animate={{ opacity: 1, x: 0 }}
+                          whileHover={{ 
+                            y: -6, 
+                            rotate: 1,
+                            transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] }
+                          }}
                           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                          className="relative w-full max-w-[200px] aspect-[2.5/3.5] bg-app-card-bg-elevated border border-app-border-strong rounded-[14px] p-4 flex flex-col justify-between font-mono text-xs select-none shadow-2xl backdrop-blur-sm group/card overflow-hidden"
+                          className="playing-card relative w-full max-w-[200px] aspect-[2.5/3.5] bg-app-card-bg-elevated rounded-[14px] p-5 flex flex-col justify-between font-mono text-xs select-none backdrop-blur-sm group/card overflow-hidden"
+                          style={{
+                            border: '1px solid var(--border-color-strong)',
+                          }}
                         >
                           {/* Animated SVG border drawing */}
                           <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
