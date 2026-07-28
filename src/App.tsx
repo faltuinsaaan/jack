@@ -18,8 +18,8 @@ import {
 import PlayingCard from './components/PlayingCard';
 import AboutAccordion from './components/AboutAccordion';
 import WorkGrid from './components/WorkGrid';
-import AiCompanion from './components/AiCompanion';
 import Navigation from './components/Navigation';
+import LegalModal from './components/LegalModal';
 import { Project } from './types';
 import { projects } from './data/projects';
 import jackImage from '../assets/.aistudio/jack.png';
@@ -27,7 +27,6 @@ import priyankImage from '../assets/.aistudio/priyank.png';
 
 export default function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [isAiOpen, setIsAiOpen] = useState(false);
   const [contactName, setContactName] = useState('');
   const [contactEmail, setContactEmail] = useState('');
   const [contactInterests, setContactInterests] = useState<string[]>([]);
@@ -38,6 +37,7 @@ export default function App() {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const [hoveredOption, setHoveredOption] = useState<string | null>(null);
   const [copiedColor, setCopiedColor] = useState<string | null>(null);
+  const [legalPage, setLegalPage] = useState<'privacy' | 'terms' | null>(null);
 
   // States for Hero Interaction Cohesion
   const [isCardHovered, setIsCardHovered] = useState(false);
@@ -61,6 +61,26 @@ export default function App() {
       document.documentElement.classList.remove('light');
     }
   }, [theme]);
+
+  // Dynamic SEO Titles for Projects
+  useEffect(() => {
+    if (selectedProject) {
+      // Map project titles to SEO titles
+      if (selectedProject.title === 'Artistically Intelligent') {
+        document.title = 'Artistically Intelligent | AI Visual Studio — Priyank Verma';
+      } else if (selectedProject.title === 'CoBuddy') {
+        document.title = 'CoBuddy | AI Memory Operating System — Priyank Verma';
+      } else {
+        // Fallback for other projects
+        document.title = `${selectedProject.title} — Priyank Verma`;
+      }
+    } else {
+      // Revert to Home title if no legal page is open (LegalModal handles its own cleanup)
+      if (!legalPage) {
+        document.title = 'AIKNPRY | Portfolio of Priyank Verma';
+      }
+    }
+  }, [selectedProject, legalPage]);
 
   // Custom Cursor state and smooth tracking
   const cursorRef = React.useRef<HTMLDivElement>(null);
@@ -270,13 +290,14 @@ export default function App() {
                   y: isHeadlineHovered ? -4 : 0
                 }}
                 transition={{ type: 'spring', stiffness: 200, damping: 25 }}
-                className="relative w-full max-w-[360px] aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl bg-neutral-900 border border-app-border/20 group cursor-default"
+                className="relative w-full max-w-[360px] rounded-2xl overflow-hidden shadow-2xl bg-neutral-900 border border-app-border/20 group cursor-default"
               >
                 <img
                   src={jackImage}
                   alt="Priyank Verma - The Jack"
-                  className="w-full h-full object-cover opacity-100 md:grayscale md:opacity-50 md:group-hover:scale-105 md:group-hover:grayscale-0 md:group-hover:opacity-75 transition-all duration-700 ease-[0.16, 1, 0.3, 1]"
+                  className="w-full h-auto block object-cover scale-105 opacity-90 transition-all duration-700 ease-[0.16, 1, 0.3, 1] hover:scale-110 hover:opacity-100"
                   referrerPolicy="no-referrer"
+
                 />
 
                 {/* Premium Subtle Gradient Overlay */}
@@ -294,8 +315,8 @@ export default function App() {
                 transition={{ duration: 1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
                 className="space-y-6"
               >
-                <div className="font-mono text-[10px] md:text-xs uppercase tracking-[0.25em] text-app-text-dim/80 font-medium select-none mb-2">
-                  Priyank Verma
+                <div className="font-mono text-[10px] md:text-xs uppercase tracking-[0.25em] text-app-text-dim/80 font-medium select-none mb-4">
+                  AIKNPRY <span className="text-app-text-dim/50 lowercase tracking-normal mx-1">by</span> Priyank Verma
                 </div>
                 <motion.h1
                   animate={{
@@ -307,8 +328,9 @@ export default function App() {
                 >
                   Jack of all trades.
                   <span className={`block italic mt-1 transition-all duration-500 ${isCardHovered ? 'text-app-text/100 scale-[1.005] origin-left' : 'text-app-text-muted'}`}>Master of building.</span>
-                  <span className={`block mt-1 font-normal transition-all duration-500 ${isCardHovered ? 'text-app-text scale-[1.005] origin-left' : 'text-app-text-dim'}`}>Limited by none.</span>
+                  <span className={`block mt-1 font-normal transition-all duration-500 ${isCardHovered ? 'text-app-text scale-[1.005] origin-left' : 'text-app-text-dim'}`}>Bound by none.</span>
                 </motion.h1>
+
               </motion.div>
 
               <motion.div
@@ -783,8 +805,15 @@ export default function App() {
         </section>
 
         <footer className="w-full border-t border-app-border py-12 select-none">
-          <div className="max-w-7xl mx-auto w-full px-6 md:px-12 flex flex-col md:flex-row justify-between items-center text-[10px] sm:text-xs font-mono text-app-text-dim space-y-4 md:space-y-0 text-center md:text-left">
-            <span>© 2026 Priyank Verma · Crafted with curiosity.</span>
+          <div className="max-w-7xl mx-auto w-full px-6 md:px-12 flex flex-col md:flex-row justify-between items-center text-[10px] sm:text-xs font-mono text-app-text-dim space-y-6 md:space-y-0 text-center md:text-left">
+            <div className="flex flex-col md:flex-row md:space-x-4 space-y-3 md:space-y-0 items-center">
+              <span>© 2026 Priyank Verma · Crafted with curiosity.</span>
+              <div className="hidden md:block text-app-border">|</div>
+              <div className="flex space-x-4">
+                <button onClick={() => setLegalPage('privacy')} className="hover:text-app-text transition-colors cursor-pointer">Privacy</button>
+                <button onClick={() => setLegalPage('terms')} className="hover:text-app-text transition-colors cursor-pointer">Terms</button>
+              </div>
+            </div>
             <div className="flex space-x-6">
               <span>♠ Imagine</span>
               <span>♥ Design</span>
@@ -1097,8 +1126,10 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* 8. Sliding AI Companion Double Sidebar */}
-      <AiCompanion isOpen={isAiOpen} onClose={() => setIsAiOpen(false)} />
+      {/* 8. Legal Modal */}
+      <AnimatePresence>
+        {legalPage && <LegalModal page={legalPage} onClose={() => setLegalPage(null)} />}
+      </AnimatePresence>
 
     </div>
   );
