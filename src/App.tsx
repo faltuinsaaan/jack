@@ -50,7 +50,7 @@ const AboutAccordion = lazy(() => import('./components/AboutAccordion'));
 const WorkGrid = lazy(() => import('./components/WorkGrid'));
 const LegalModal = lazy(() => import('./components/LegalModal'));
 const jackImage = '/jack.webp';
-import priyankImage from '../assets/.aistudio/priyank.webp';
+import priyankImage from '../assets/priyank.webp';
 
 export default function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
