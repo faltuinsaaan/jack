@@ -23,8 +23,6 @@ import { projects } from './data/projects';
 const AboutAccordion = lazy(() => import('./components/AboutAccordion'));
 const WorkGrid = lazy(() => import('./components/WorkGrid'));
 const LegalModal = lazy(() => import('./components/LegalModal'));
-import { Project } from './types';
-import { projects } from './data/projects';
 const jackImage = '/jack.webp';
 import priyankImage from '../assets/.aistudio/priyank.webp';
 
