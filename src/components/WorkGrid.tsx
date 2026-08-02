@@ -77,6 +77,8 @@ export default function WorkGrid({ onSelectProject }: WorkGridProps) {
                   alt={projects[0].title}
                   referrerPolicy="no-referrer"
                   loading="lazy"
+                  width="800"
+                  height="600"
                   className="w-full h-full object-cover md:grayscale md:brightness-90 md:group-hover:grayscale-0 md:group-hover:brightness-100 md:group-hover:scale-102 transition-all duration-700 ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
@@ -104,6 +106,8 @@ export default function WorkGrid({ onSelectProject }: WorkGridProps) {
                   alt={projects[1].title}
                   referrerPolicy="no-referrer"
                   loading="lazy"
+                  width="800"
+                  height="600"
                   className="w-full h-full object-cover md:grayscale md:brightness-90 md:group-hover:grayscale-0 md:group-hover:brightness-100 md:group-hover:scale-102 transition-all duration-700 ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
@@ -131,6 +135,8 @@ export default function WorkGrid({ onSelectProject }: WorkGridProps) {
                   alt={projects[2].title}
                   referrerPolicy="no-referrer"
                   loading="lazy"
+                  width="800"
+                  height="600"
                   className="w-full h-full object-cover md:grayscale md:brightness-90 md:group-hover:grayscale-0 md:group-hover:brightness-100 md:group-hover:scale-102 transition-all duration-700 ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
@@ -158,6 +164,8 @@ export default function WorkGrid({ onSelectProject }: WorkGridProps) {
                   alt={projects[3].title}
                   referrerPolicy="no-referrer"
                   loading="lazy"
+                  width="800"
+                  height="600"
                   className="w-full h-full object-cover md:grayscale md:brightness-90 md:group-hover:grayscale-0 md:group-hover:brightness-100 md:group-hover:scale-102 transition-all duration-700 ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
@@ -185,6 +193,8 @@ export default function WorkGrid({ onSelectProject }: WorkGridProps) {
                   alt={projects[4].title}
                   referrerPolicy="no-referrer"
                   loading="lazy"
+                  width="800"
+                  height="600"
                   className="w-full h-full object-cover md:grayscale md:brightness-90 md:group-hover:grayscale-0 md:group-hover:brightness-100 md:group-hover:scale-102 transition-all duration-700 ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
@@ -212,6 +222,8 @@ export default function WorkGrid({ onSelectProject }: WorkGridProps) {
                   alt={projects[5].title}
                   referrerPolicy="no-referrer"
                   loading="lazy"
+                  width="800"
+                  height="600"
                   className="w-full h-full object-cover md:grayscale md:brightness-90 md:group-hover:grayscale-0 md:group-hover:brightness-100 md:group-hover:scale-102 transition-all duration-700 ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
@@ -239,6 +251,8 @@ export default function WorkGrid({ onSelectProject }: WorkGridProps) {
                   alt={projects[6].title}
                   referrerPolicy="no-referrer"
                   loading="lazy"
+                  width="800"
+                  height="600"
                   className="w-full h-full object-cover md:grayscale md:brightness-90 md:group-hover:grayscale-0 md:group-hover:brightness-100 md:group-hover:scale-102 transition-all duration-700 ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">

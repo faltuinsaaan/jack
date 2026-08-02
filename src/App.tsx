@@ -22,7 +22,7 @@ import Navigation from './components/Navigation';
 import LegalModal from './components/LegalModal';
 import { Project } from './types';
 import { projects } from './data/projects';
-import jackImage from '../assets/.aistudio/jack.webp';
+const jackImage = '/jack.webp';
 import priyankImage from '../assets/.aistudio/priyank.webp';
 
 export default function App() {
@@ -295,6 +295,8 @@ export default function App() {
                 <img
                   src={jackImage}
                   alt="Priyank Verma - The Jack"
+                  width="1050"
+                  height="1498"
                   className="w-full h-auto block object-cover scale-105 opacity-90 transition-all duration-700 ease-[0.16, 1, 0.3, 1] hover:scale-110 hover:opacity-100"
                   referrerPolicy="no-referrer"
                   fetchPriority="high"
@@ -404,6 +406,8 @@ export default function App() {
                   <img
                     src={priyankImage}
                     alt="Priyank Verma - Origins"
+                    width="2400"
+                    height="2400"
                     className="w-full h-full object-cover opacity-100 md:opacity-90 md:group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                     referrerPolicy="no-referrer"
                     loading="lazy"
