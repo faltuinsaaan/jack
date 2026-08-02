@@ -32,6 +32,13 @@ export default defineConfig(() => {
         '@': path.resolve(__dirname, '.'),
       },
     },
+    build: {
+      modulePreload: {
+        resolveDependencies(filename, deps) {
+          return deps.filter(dep => !dep.includes('AboutAccordion') && !dep.includes('WorkGrid') && !dep.includes('LegalModal'));
+        },
+      },
+    },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
       // Do not modify—file watching is disabled to prevent flickering during agent edits.
