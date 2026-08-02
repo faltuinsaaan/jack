@@ -20,9 +20,24 @@ import Navigation from './components/Navigation';
 import { Project } from './types';
 import { projects } from './data/projects';
 
-const AboutAccordion = lazy(() => import('./components/AboutAccordion'));
-const WorkGrid = lazy(() => import('./components/WorkGrid'));
-const LegalModal = lazy(() => import('./components/LegalModal'));
+function deferImport<T>(importFn: () => Promise<T>): () => Promise<T> {
+  return () =>
+    new Promise((resolve) => {
+      if (document.readyState === 'complete') {
+        setTimeout(() => importFn().then(resolve), 50);
+      } else {
+        const handler = () => {
+          window.removeEventListener('load', handler);
+          setTimeout(() => importFn().then(resolve), 50);
+        };
+        window.addEventListener('load', handler);
+      }
+    });
+}
+
+const AboutAccordion = lazy(deferImport(() => import('./components/AboutAccordion')));
+const WorkGrid = lazy(deferImport(() => import('./components/WorkGrid')));
+const LegalModal = lazy(deferImport(() => import('./components/LegalModal')));
 const jackImage = '/jack.webp';
 import priyankImage from '../assets/.aistudio/priyank.webp';
 
