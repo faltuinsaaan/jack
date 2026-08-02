@@ -39,22 +39,8 @@ export default defineConfig(() => {
             dep =>
               !dep.includes('AboutAccordion') &&
               !dep.includes('WorkGrid') &&
-              !dep.includes('LegalModal') &&
-              !dep.includes('vendor-motion') &&
-              !dep.includes('vendor-lucide')
+              !dep.includes('LegalModal')
           );
-        },
-      },
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            if (id.includes('node_modules/lucide-react')) {
-              return 'vendor-lucide';
-            }
-            if (id.includes('node_modules/motion') || id.includes('node_modules/framer-motion')) {
-              return 'vendor-motion';
-            }
-          },
         },
       },
     },

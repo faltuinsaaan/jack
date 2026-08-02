@@ -1,4 +1,4 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react';
+import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   ArrowLeft,
@@ -20,24 +20,35 @@ import Navigation from './components/Navigation';
 import { Project } from './types';
 import { projects } from './data/projects';
 
-function deferImport<T>(importFn: () => Promise<T>): () => Promise<T> {
-  return () =>
-    new Promise((resolve) => {
-      if (document.readyState === 'complete') {
-        setTimeout(() => importFn().then(resolve), 50);
-      } else {
-        const handler = () => {
-          window.removeEventListener('load', handler);
-          setTimeout(() => importFn().then(resolve), 50);
-        };
-        window.addEventListener('load', handler);
-      }
-    });
+function DeferredView({ children, fallback }: { children: React.ReactNode; fallback?: React.ReactNode }) {
+  const [shouldRender, setShouldRender] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldRender(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '300px 0px' }
+    );
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={containerRef} className="w-full">
+      {shouldRender ? children : fallback}
+    </div>
+  );
 }
 
-const AboutAccordion = lazy(deferImport(() => import('./components/AboutAccordion')));
-const WorkGrid = lazy(deferImport(() => import('./components/WorkGrid')));
-const LegalModal = lazy(deferImport(() => import('./components/LegalModal')));
+const AboutAccordion = lazy(() => import('./components/AboutAccordion'));
+const WorkGrid = lazy(() => import('./components/WorkGrid'));
+const LegalModal = lazy(() => import('./components/LegalModal'));
 const jackImage = '/jack.webp';
 import priyankImage from '../assets/.aistudio/priyank.webp';
 
@@ -437,9 +448,11 @@ export default function App() {
 
             {/* Bottom Accordion Block: Full-width */}
             <div className="w-full pt-4 min-h-[400px]">
-              <Suspense fallback={<div className="w-full h-full flex items-center justify-center text-app-text-dim/50"><span className="animate-pulse font-mono uppercase tracking-widest text-xs">Loading...</span></div>}>
-                <AboutAccordion />
-              </Suspense>
+              <DeferredView fallback={<div className="w-full h-full min-h-[400px] flex items-center justify-center text-app-text-dim/50"><span className="animate-pulse font-mono uppercase tracking-widest text-xs">Loading...</span></div>}>
+                <Suspense fallback={<div className="w-full h-full min-h-[400px] flex items-center justify-center text-app-text-dim/50"><span className="animate-pulse font-mono uppercase tracking-widest text-xs">Loading...</span></div>}>
+                  <AboutAccordion />
+                </Suspense>
+              </DeferredView>
             </div>
 
           </div>
@@ -451,9 +464,11 @@ export default function App() {
             <span className="font-mono text-[10px] text-app-text-dim uppercase tracking-[0.3em] block mb-12 text-left">
               The Deck
             </span>
-            <Suspense fallback={<div className="h-[600px] w-full flex items-center justify-center text-app-text-dim/50"><span className="animate-pulse font-mono uppercase tracking-widest text-xs">Loading Deck...</span></div>}>
-              <WorkGrid onSelectProject={(proj) => setSelectedProject(proj)} />
-            </Suspense>
+            <DeferredView fallback={<div className="h-[600px] w-full flex items-center justify-center text-app-text-dim/50"><span className="animate-pulse font-mono uppercase tracking-widest text-xs">Loading Deck...</span></div>}>
+              <Suspense fallback={<div className="h-[600px] w-full flex items-center justify-center text-app-text-dim/50"><span className="animate-pulse font-mono uppercase tracking-widest text-xs">Loading Deck...</span></div>}>
+                <WorkGrid onSelectProject={(proj) => setSelectedProject(proj)} />
+              </Suspense>
+            </DeferredView>
           </div>
         </section>
 
