@@ -35,7 +35,26 @@ export default defineConfig(() => {
     build: {
       modulePreload: {
         resolveDependencies(filename, deps) {
-          return deps.filter(dep => !dep.includes('AboutAccordion') && !dep.includes('WorkGrid') && !dep.includes('LegalModal'));
+          return deps.filter(
+            dep =>
+              !dep.includes('AboutAccordion') &&
+              !dep.includes('WorkGrid') &&
+              !dep.includes('LegalModal') &&
+              !dep.includes('vendor-motion') &&
+              !dep.includes('vendor-lucide')
+          );
+        },
+      },
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules/lucide-react')) {
+              return 'vendor-lucide';
+            }
+            if (id.includes('node_modules/motion') || id.includes('node_modules/framer-motion')) {
+              return 'vendor-motion';
+            }
+          },
         },
       },
     },
