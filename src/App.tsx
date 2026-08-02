@@ -295,8 +295,8 @@ export default function App() {
                 <img
                   src={jackImage}
                   alt="Priyank Verma - The Jack"
-                  width="800"
-                  height="1141"
+                  width="600"
+                  height="856"
                   className="w-full h-auto block object-cover scale-105 opacity-90 transition-all duration-700 ease-[0.16, 1, 0.3, 1] hover:scale-110 hover:opacity-100"
                   referrerPolicy="no-referrer"
                   fetchPriority="high"
@@ -406,8 +406,8 @@ export default function App() {
                   <img
                     src={priyankImage}
                     alt="Priyank Verma - Origins"
-                    width="1200"
-                    height="1200"
+                    width="800"
+                    height="800"
                     className="w-full h-full object-cover opacity-100 md:opacity-90 md:group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                     referrerPolicy="no-referrer"
                     loading="lazy"
