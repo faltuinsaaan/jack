@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   ArrowLeft,
@@ -16,10 +16,13 @@ import {
 } from 'lucide-react';
 
 import PlayingCard from './components/PlayingCard';
-import AboutAccordion from './components/AboutAccordion';
-import WorkGrid from './components/WorkGrid';
 import Navigation from './components/Navigation';
-import LegalModal from './components/LegalModal';
+import { Project } from './types';
+import { projects } from './data/projects';
+
+const AboutAccordion = lazy(() => import('./components/AboutAccordion'));
+const WorkGrid = lazy(() => import('./components/WorkGrid'));
+const LegalModal = lazy(() => import('./components/LegalModal'));
 import { Project } from './types';
 import { projects } from './data/projects';
 const jackImage = '/jack.webp';
@@ -420,8 +423,10 @@ export default function App() {
             </div>
 
             {/* Bottom Accordion Block: Full-width */}
-            <div className="w-full pt-4">
-              <AboutAccordion />
+            <div className="w-full pt-4 min-h-[400px]">
+              <Suspense fallback={<div className="w-full h-full flex items-center justify-center text-app-text-dim/50"><span className="animate-pulse font-mono uppercase tracking-widest text-xs">Loading...</span></div>}>
+                <AboutAccordion />
+              </Suspense>
             </div>
 
           </div>
@@ -433,7 +438,9 @@ export default function App() {
             <span className="font-mono text-[10px] text-app-text-dim uppercase tracking-[0.3em] block mb-12 text-left">
               The Deck
             </span>
-            <WorkGrid onSelectProject={(proj) => setSelectedProject(proj)} />
+            <Suspense fallback={<div className="h-[600px] w-full flex items-center justify-center text-app-text-dim/50"><span className="animate-pulse font-mono uppercase tracking-widest text-xs">Loading Deck...</span></div>}>
+              <WorkGrid onSelectProject={(proj) => setSelectedProject(proj)} />
+            </Suspense>
           </div>
         </section>
 
@@ -1134,7 +1141,11 @@ export default function App() {
 
       {/* 8. Legal Modal */}
       <AnimatePresence>
-        {legalPage && <LegalModal page={legalPage} onClose={() => setLegalPage(null)} />}
+        {legalPage && (
+          <Suspense fallback={null}>
+            <LegalModal page={legalPage} onClose={() => setLegalPage(null)} />
+          </Suspense>
+        )}
       </AnimatePresence>
 
     </div>
