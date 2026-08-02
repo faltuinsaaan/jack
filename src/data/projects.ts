@@ -1,12 +1,12 @@
 import { Project } from '../types';
 
-import aiImage from '../../assets/ai.png';
-import coldstackImage from '../../assets/coldstack.png';
-import madhubaniImage from '../../assets/madhubani.png';
-import postureImage from '../../assets/posture.png';
-import qrImage from '../../assets/qr.png';
-import rizzlerImage from '../../assets/rizzler.png';
-import tarnishedtimesImage from '../../assets/tarnishedtimes.png';
+import aiImage from '../../assets/ai.webp';
+import coldstackImage from '../../assets/coldstack.webp';
+import madhubaniImage from '../../assets/madhubani.webp';
+import postureImage from '../../assets/posture.webp';
+import qrImage from '../../assets/qr.webp';
+import rizzlerImage from '../../assets/rizzler.webp';
+import tarnishedtimesImage from '../../assets/tarnishedtimes.webp';
 
 export const projects: Project[] = [
   {
